@@ -1,0 +1,10 @@
+{
+   "tabWidth": 3,
+   "semi": true,
+   "bracketSpacing": true,
+   "bracketSameLine": true,
+   "jsxBracketSameLine": true,
+   "arrowParens": "always",
+   "singleAttributePerLine": false,
+   "printWidth": 140
+}
