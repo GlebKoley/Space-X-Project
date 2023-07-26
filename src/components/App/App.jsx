@@ -30,7 +30,7 @@ function App() {
    const [animaitonList, api] = useSpring(() => ({
       from: { transform: "translateY(2000px)" },
       to: { transform: "translateY(0px)" },
-      config: { tension: 270, friction: 100 },
+      config: { tension: 270, friction: 130 },
    }));
 
    useEffect(() => {
