@@ -5,10 +5,12 @@ import styles from "../../css/app.module.css";
 import LaunchesContent from "../LaunchesContent/LaunchesContent";
 import Sort from "../Sort/Sort";
 import Spinner from "../UI/Spinner";
+import Error from "../UI/Error";
 import { getData } from "../Services/getData";
 
 function App() {
    const [spaceData, setSpaceData] = useState(null);
+   const [error, setError] = useState(false);
    const dateStart = "2015-02";
    const dateEnd = "2019-12-31";
    const query = {
@@ -34,7 +36,12 @@ function App() {
    }));
 
    useEffect(() => {
-      getData("https://api.spacexdata.com/v5/launches/query", query).then((res) => setSpaceData(res.docs));
+      getData("https://api.spacexdata.com/v5/launches/query", query)
+         .then((res) => {
+            setSpaceData(res.docs);
+            setError(false);
+         })
+         .catch(() => setError(true));
    }, []);
 
    const sortFunction = (state) => {
@@ -74,6 +81,7 @@ function App() {
             <h1 className={styles.header}> Успешные космические миссии SpaceX за 2015-2019 года</h1>
          </header>
          <main>
+            {error === true ? <Error /> : null}
             {spaceData === null ? (
                <Spinner />
             ) : (

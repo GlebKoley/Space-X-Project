@@ -6,7 +6,9 @@ const getData = async (url = "", data = {}) => {
       },
       body: JSON.stringify(data),
    });
-   return response.json();
+   const dataResult = await response.json();
+
+   return dataResult;
 };
 
 export { getData };

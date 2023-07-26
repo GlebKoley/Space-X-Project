@@ -103,7 +103,7 @@ body {
    font-weight: bold;
    border: 3px solid black;
    border-radius: 20px;
-   width: auto;
+   width: 250px;
    height: 60px;
    padding: 5px;
    background-color: rgb(168, 168, 168);
@@ -117,8 +117,14 @@ body {
    transform: scale(1.12);
 }
 
-.spinner {
+.spinner,
+.error {
    margin-top: 100px;
    display: flex;
    justify-content: center;
+}
+
+.error {
+   font-size: 35px;
+   color: rgb(197, 64, 64);
 }
