@@ -9,8 +9,8 @@ const LaunchesContent = ({ spaceData }) => {
                   return (
                      <li key={item.id} className={styles.style__li}>
                         <div className={styles.image__div}>
-                           <img className={styles.back__image} loading="lazy" src={item.links.flickr.original[1]} alt="Loading" />
-                        </div >
+                           <img className={styles.back__image} loading="lazy" src={item.links.flickr.original[1]} alt="IMAGE NOT AVIABLE" />
+                        </div>
                         <div className={styles.content__list}>
                            <h1 className={styles.content__title}>
                               <span className={styles.bold}>Название миссии:</span> {item.name}

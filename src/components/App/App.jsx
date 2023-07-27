@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
 import styles from "../../css/app.module.css";
@@ -8,26 +8,10 @@ import Spinner from "../UI/Spinner";
 import Error from "../UI/Error";
 import { getData } from "../Services/getData";
 
+import { useQuery } from "@tanstack/react-query";
+
 function App() {
-   const [spaceData, setSpaceData] = useState(null);
-   const [error, setError] = useState(false);
-   const dateStart = "2015-02";
-   const dateEnd = "2019-12-31";
-   const query = {
-      query: {
-         date_utc: {
-            $gte: `${dateStart}`,
-            $lte: `${dateEnd}`,
-         },
-         success: "true",
-      },
-      options: {
-         limit: 1000,
-         sort: {
-            date_utc: "desc",
-         },
-      },
-   };
+   const [spaceData, setSpaceData] = useState([]);
 
    const [animaitonList, api] = useSpring(() => ({
       from: { transform: "translateY(2000px)" },
@@ -35,14 +19,16 @@ function App() {
       config: { tension: 270, friction: 130 },
    }));
 
-   useEffect(() => {
-      getData("https://api.spacexdata.com/v5/launches/query", query)
-         .then((res) => {
-            setSpaceData(res.docs);
-            setError(false);
-         })
-         .catch(() => setError(true));
-   }, []);
+   const { isLoading, data, isError, onSuccess } = useQuery({
+      queryKey: ["launches"],
+      queryFn: () => fetch("https://api.spacexdata.com/v5/launches").then((res) => res.json()),
+      select: (data) => data.filter((item) => item.date_utc.match(/^201[5-9]/gm) && item.success),
+      onSuccess: (data) => setSpaceData([...data.reverse()]),
+   });
+
+   if (isLoading) return <Spinner />;
+
+   if (isError) return <Error />;
 
    const sortFunction = (state) => {
       api.start({
@@ -81,17 +67,10 @@ function App() {
             <h1 className={styles.header}> Успешные космические миссии SpaceX за 2015-2019 года</h1>
          </header>
          <main>
-            {error === true ? <Error /> : null}
-            {spaceData === null ? (
-               <Spinner />
-            ) : (
-               <>
-                  <Sort sortFunction={sortFunction} />
-                  <animated.div style={animaitonList}>
-                     <LaunchesContent spaceData={spaceData} />
-                  </animated.div>
-               </>
-            )}
+            <Sort sortFunction={sortFunction} />
+            <animated.div style={animaitonList}>
+               <LaunchesContent spaceData={spaceData} />
+            </animated.div>
          </main>
       </div>
    );
