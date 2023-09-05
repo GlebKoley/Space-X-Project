@@ -3,11 +3,12 @@
   <h3 align="center">Space-X Task</h3>
 
 ## О проекте
+
   <p align="center">
     Тестовое задание на позицию Frontend разработчика
     <br/>
     <br/>
-    <!-- <a href="https://glebkoley.github.io/pokemon-test-task/">Посмотреть демо</a> -->
+    <a href="https://glebkoley.github.io/Space-X-Project/">Посмотреть демо</a>
   </p>
 </p>
 
