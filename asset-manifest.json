@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Space-X-Project/static/css/main.ea84ff22.css",
+    "main.js": "/Space-X-Project/static/js/main.7fae2fb8.js",
+    "static/media/Spinner-200px.svg": "/Space-X-Project/static/media/Spinner-200px.3c541d2bac9e9232c0147f1fbb34d583.svg",
+    "index.html": "/Space-X-Project/index.html",
+    "main.ea84ff22.css.map": "/Space-X-Project/static/css/main.ea84ff22.css.map",
+    "main.7fae2fb8.js.map": "/Space-X-Project/static/js/main.7fae2fb8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea84ff22.css",
+    "static/js/main.7fae2fb8.js"
+  ]
+}
